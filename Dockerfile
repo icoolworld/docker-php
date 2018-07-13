@@ -74,3 +74,29 @@ RUN \
 \
  && rm -rf /tmp/pear ~/.pearrc \
  && apk del .phpize-deps \
+\
+ ## install bcmath ext
+\
+&& docker-php-ext-configure bcmath \
+&& docker-php-ext-install -j$(nproc) bcmath \
+&& docker-php-ext-enable bcmath \
+\
+## install amqp ext
+\
+&& wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.8.0/rabbitmq-c-0.8.0.tar.gz \
+&& mkdir -p /tmp/rabbitmq /tmp/amqp \
+&& tar zxf rabbitmq-c-0.8.0.tar.gz -C /tmp/rabbitmq --strip-components=1 \
+&& rm -rf rabbitmq-c-0.8.0.tar.gz \
+&& cd /tmp/rabbitmq \
+&& ./configure \
+&& make -j$(nproc) && make install \
+&& cd / && rm -rf /tmp/rabbitmq \
+&& wget http://pecl.php.net/get/amqp-1.9.3.tgz \
+&& tar zxf amqp-1.9.3.tgz -C /tmp/amqp --strip-components=1 \
+&& rm -rf amqp-1.9.3.tgz \
+&& docker-php-ext-configure /tmp/amqp --with-amqp --with-librabbitmq-dir=/usr/local \
+&& docker-php-ext-install /tmp/amqp \
+&& docker-php-ext-enable amqp \
+&& rm -r /tmp/amqp \
+
+
