@@ -98,5 +98,11 @@ RUN \
 && docker-php-ext-install /tmp/amqp \
 && docker-php-ext-enable amqp \
 && rm -r /tmp/amqp \
+\
+## install composer
+\
+&& curl -sS https://getcomposer.org/installer | php \
+&& chmod +x composer.phar \
+&& mv composer.phar /usr/local/bin/composer \
 
 
