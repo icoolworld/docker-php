@@ -51,8 +51,8 @@ RUN \
  && docker-php-ext-enable redis \
 # install mongodb ext
 \
- #&& apk add --no-cache --virtual .mongodb openssl-dev \
- && apk add --no-cache --virtual .mongodb libressl-dev \
+ && apk add --no-cache --virtual .mongodb openssl-dev \
+ #&& apk add --no-cache --virtual .mongodb libressl-dev \
  && pecl install mongodb-1.3.4 \
  && docker-php-ext-enable mongodb \
 \
