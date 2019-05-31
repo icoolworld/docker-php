@@ -83,10 +83,10 @@ RUN \
 \
 ## install amqp ext
 \
-&& wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.9.0/rabbitmq-c-0.9.0.tar.gz \
+&& wget https://github.com/alanxz/rabbitmq-c/releases/download/v0.8.0/rabbitmq-c-0.8.0.tar.gz \
 && mkdir -p /tmp/rabbitmq /tmp/amqp \
-&& tar zxf rabbitmq-c-0.9.0.tar.gz -C /tmp/rabbitmq --strip-components=1 \
-&& rm -rf rabbitmq-c-0.9.0.tar.gz \
+&& tar zxf rabbitmq-c-0.8.0.tar.gz -C /tmp/rabbitmq --strip-components=1 \
+&& rm -rf rabbitmq-c-0.8.0.tar.gz \
 && cd /tmp/rabbitmq \
 && ./configure \
 && make -j$(nproc) && make install \
